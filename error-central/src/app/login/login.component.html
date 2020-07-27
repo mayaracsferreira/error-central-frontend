@@ -1,0 +1,22 @@
+<div class="main-container">
+  <mat-card class="container-register">
+    <mat-card-content>
+      <h1>Login</h1>
+      <mat-form-field class="field">
+        <input id="email" matInput placeholder="e-mail" [type]="email">
+      </mat-form-field>
+      <mat-form-field class="field">
+        <div class="pass">
+          <input id="password" matInput placeholder="password" [type]="hidePassword ? 'password' : 'text'">
+          <button id="hideButton" mat-button (click)="hidePassword = !hidePassword">
+            <mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+          </button>
+        </div>
+      </mat-form-field>
+      <button mat-flat-button id="login">Login</button>
+      <div class="footer">        
+        <p> Não tem uma conta? Cadastre-se <a [routerLink]="['/cadastro']">aqui</a></p>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>

@@ -1,0 +1,10 @@
+.container{
+    display: flex;
+    justify-content: space-between;
+}
+
+.login-register{
+    display: flex;
+    justify-content: space-around;
+    width: 20%;
+}
