@@ -3,24 +3,24 @@
     <mat-card-content>
       <h1>Cadastro</h1>
       <mat-form-field class="field">
-        <input id="nome" matInput placeholder="nome" maxlength="50">
-        <mat-hint>{{0}} / 50</mat-hint>
+        <input id="nome" matInput placeholder="nome" [(ngModel)]="data.name" maxlength="50">
+        <mat-hint>{{data.name?.length || 0}} / 50</mat-hint>
       </mat-form-field>
-      
+
       <mat-form-field class="field">
-        <input id="nome" matInput placeholder="e-mail">
-      </mat-form-field>     
+        <input id="nome" name="email" matInput placeholder="e-mail" [(ngModel)]="data.email" email="true">
+      </mat-form-field>
 
       <mat-form-field class="field">
         <div class="pass">
-          <input id="password" matInput placeholder="password" [type]="hidePassword ? 'password' : 'text'">
+          <input id="password" matInput placeholder="password" [(ngModel)]="data.password"
+            [type]="hidePassword ? 'password' : 'text'">
           <button id="hideButton" mat-button (click)="hidePassword = !hidePassword">
             <mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
           </button>
         </div>
       </mat-form-field>
-      <button mat-flat-button color="primary">Cadastrar</button>
-      <p>Já tem uma conta? <a [routerLink]="['/login']">Faça login</a></p>
+      <button mat-flat-button color="primary" (click)="register()">Cadastrar</button>
     </mat-card-content>
   </mat-card>
 </div>

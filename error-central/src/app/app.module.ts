@@ -14,14 +14,18 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { DialogComponent } from './common/dialog/dialog.component'
 import { HomeComponent } from './home/home.component';
+import { MatDialogModule, MatSnackBarModule } from '@angular/material';
+import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+import { ToastrComponent } from './common/toastr/toastr.component';
+
 
 const appRoutes: Routes = [
   {
     path: '',
     component: HomeComponent
-  }, 
+  },
   {
     path: 'bem-vindo',
     component: HomeComponent,
@@ -41,8 +45,8 @@ const appRoutes: Routes = [
     AppComponent,
     RegisterComponent,
     LoginComponent,
-    DialogComponent,
-    HomeComponent
+    HomeComponent,
+    ToastrComponent,
   ],
   imports: [
     RouterModule.forRoot(
@@ -58,9 +62,15 @@ const appRoutes: Routes = [
     MatFormFieldModule,
     BrowserAnimationsModule,
     MatToolbarModule,
-    MatIconModule
+    MatIconModule,
+    MatDialogModule,
+    FormsModule,
+    HttpClientModule,
+    HttpClientModule,
+    MatSnackBarModule
   ],
   providers: [AuthenticationService],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [ToastrComponent]
 })
 export class AppModule { }

@@ -1,3 +1,5 @@
+import { User } from './../models/user-model';
+import { LoginModel } from '../models/login-model';
 import { environment } from './../../../environments/environment';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
@@ -19,21 +21,21 @@ export class AuthenticationService {
 
   constructor(http: HttpClient) {
     this._http = http;
-    this._serviceUrl = environment.Api.url;
+    this._serviceUrl = `${environment.Api.url}/api`;
     this.currentUserSubject = new BehaviorSubject<any>(JSON.parse(localStorage.getItem('currentUser')));
     this.currentUser = this.currentUserSubject.asObservable();
   }
 
-  public get currentUserValue(): any {
+  public get currentUserValue(): User {
     return this.currentUserSubject.value;
   }
 
-  register(name: string, email: string, password: string) {
-    return this._http.post<any>(`${this._serviceUrl}/users`, {name,  email, password}, httpOptions);      
+  register(user: User) {
+    return this._http.post<User>(`${this._serviceUrl}/user`, user, httpOptions);
   }
 
-  login(loginOrEmail: string, password: string) {
-    return this._http.post<any>(`${this._serviceUrl}/login`, {loginOrEmail, password}, httpOptions)
+  login(loginInfo: LoginModel) {
+    return this._http.post<LoginModel>(`${this._serviceUrl}/login`, loginInfo, httpOptions)
       .pipe(map(user => {
         // store user details and jwt token in local storage to keep user logged in between page refreshes
         localStorage.setItem('currentUser', JSON.stringify(user));

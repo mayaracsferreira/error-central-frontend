@@ -5,10 +5,10 @@ mat-card-content{
 }
 
 .field{
-    margin: 15px;
-    width: 30%;
+    margin: 15px;    
     display: flex;
     flex-direction: column;
+    width: 80%;
 }
 
 .pass{
