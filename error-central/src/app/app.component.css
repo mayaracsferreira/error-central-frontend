@@ -1,10 +1,31 @@
-.container{
+.main-toolbar{
     display: flex;
-    justify-content: space-between;
+    justify-content: space-between;   
+    background-color: #7c1952;
+    color: white;
 }
 
-.login-register{
+.first-section{
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
+    width: 50%;
+    align-items: baseline;
+}
+
+.sign-section{
+    display: flex;
     width: 20%;
+    justify-content: space-around;
+}
+
+.mat-button{
+    font-size: large;    
+}
+
+.welcome-phrase{
+    flex: 1;
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    font-size: smaller;
 }

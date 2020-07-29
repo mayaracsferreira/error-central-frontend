@@ -24,9 +24,7 @@ export class RegisterComponent implements OnInit {
   }
 
   register() {
-    console.log(this.data);
     this.ds.register(this.data).subscribe(result => {
-      console.log(result);
     },
       error => {
         this.ToastError("Não foi possível encontrar efetuar o cadastro");

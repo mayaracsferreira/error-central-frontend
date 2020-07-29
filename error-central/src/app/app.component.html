@@ -1,1 +1,36 @@
+<!--application toolbar-->
+<mat-toolbar class="main-toolbar" *ngIf="currentUser">
+    <div class="first-section">
+        <span>Error Central</span>
+        <div class="welcome-phrase">
+            <span id="token">Bem-vindo(a)! Seu token é {{currentUser.accessToken}} </span>
+        </div>
+    </div>
+    <div class="sign-section">
+        <div>
+            <button id="profile" mat-button [matMenuTriggerFor]="menu">
+                <mat-icon>person</mat-icon>
+            </button>
+            <mat-menu #menu="matMenu">
+                <button mat-menu-item (click)="logout()">Sair</button>
+            </mat-menu>
+        </div>
+    </div>
+</mat-toolbar>
+
+<!--welcome-page-->
+<mat-toolbar class="main-toolbar" *ngIf="!currentUser">
+    <div class="first-section">
+        <span>Error Central</span>
+    </div>
+    <div class="sign-section">
+        <button id="cadastro" mat-button (click)="openRegisterDialog()">
+            Cadastro
+        </button>
+        <button id="login" mat-button (click)="openLoginDialog()">
+            Login
+        </button>
+    </div>
+</mat-toolbar>
+
 <router-outlet></router-outlet>

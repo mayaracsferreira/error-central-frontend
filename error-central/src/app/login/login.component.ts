@@ -1,3 +1,4 @@
+import { User } from './../common/models/user-model';
 import { ToastrComponent } from './../common/toastr/toastr.component';
 import { AuthenticationService } from './../common/services/authentication.service';
 import { LoginModel } from '../common/models/login-model';
@@ -15,14 +16,13 @@ export class LoginComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: LoginModel,
     private ds: AuthenticationService,
     private snackBar: MatSnackBar,) {    
-      this.data = new LoginModel();
+      this.data = new LoginModel();      
   }
 
   ngOnInit() {
   }
 
-  login() {
-    console.log(this.data);
+  login() {    
     this.ds.login(this.data).subscribe(result => {
       console.log(result);
     },

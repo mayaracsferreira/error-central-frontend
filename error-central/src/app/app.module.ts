@@ -1,10 +1,10 @@
+import { ErrorCentralModule } from './core/error-central.module';
 import { AuthenticationService } from './common/services/authentication.service';
 import { MatIconModule } from '@angular/material/icon';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { ErrorResponseModule } from './core/error-response.module';
 import { Routes, RouterModule } from '@angular/router';
 import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
@@ -15,17 +15,13 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { HomeComponent } from './home/home.component';
-import { MatDialogModule, MatSnackBarModule } from '@angular/material';
+import { MatDialogModule, MatSnackBarModule, MatMenuModule } from '@angular/material';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { ToastrComponent } from './common/toastr/toastr.component';
 
 
-const appRoutes: Routes = [
-  {
-    path: '',
-    component: HomeComponent
-  },
+const appRoutes: Routes = [ 
   {
     path: 'bem-vindo',
     component: HomeComponent,
@@ -55,7 +51,7 @@ const appRoutes: Routes = [
     ),
     BrowserModule,
     AppRoutingModule,
-    ErrorResponseModule,
+    ErrorCentralModule,
     MatCardModule,
     MatInputModule,
     MatButtonModule,
@@ -67,7 +63,8 @@ const appRoutes: Routes = [
     FormsModule,
     HttpClientModule,
     HttpClientModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatMenuModule
   ],
   providers: [AuthenticationService],
   bootstrap: [AppComponent],
