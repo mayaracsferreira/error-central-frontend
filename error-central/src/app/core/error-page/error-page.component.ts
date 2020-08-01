@@ -40,15 +40,27 @@ export class ErrorPageComponent implements OnInit {
     this.ds.delete(id);
   }
 
-  openLoginDialog(id: number) {
+  openLoginDialog(model) {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.autoFocus = true;
     dialogConfig.width = '500px';
-    dialogConfig.data = { id: id };
+    dialogConfig.data = model;
     const dialogRef = this.dialog.open(ErrorResponseComponent, dialogConfig);
     dialogRef.afterClosed().subscribe(result => {
       console.log(result);
     });
+  }
+
+  getEventDetails(id: number){
+    this.ds.getById(id).subscribe(
+      result => {
+        // this.model = result;
+        this.openLoginDialog(result);
+      },
+      error => {
+        console.log(error);
+      }
+    );
   }
 
 }

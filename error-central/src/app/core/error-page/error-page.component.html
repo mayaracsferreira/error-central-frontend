@@ -71,7 +71,7 @@
             <ng-container matColumnDef="details">
                 <mat-header-cell *matHeaderCellDef> Detalhes </mat-header-cell>
                 <mat-cell *matCellDef="let element">
-                    <button mat-button (click)="openLoginDialog(element.eventID)">
+                    <button mat-button (click)="getEventDetails(element.eventID)">
                         <i class="material-icons">info</i>
                     </button>
                 </mat-cell>

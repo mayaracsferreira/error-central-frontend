@@ -16,14 +16,7 @@ export class ErrorResponseComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.ds.getById(this.data.id).subscribe(
-      result => {
-        this.model = result;
-      },
-      error => {
-        console.log(error);
-      }
-    );
+    
   }
 
 }
