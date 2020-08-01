@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { MAT_DIALOG_DATA } from '@angular/material';
+import { EventLogModel } from './../../common/models/event-log-model';
+import { EventlogService } from './../../common/services/eventlog.service';
+import { Component, OnInit, Inject } from '@angular/core';
 
 @Component({
   selector: 'app-error-response',
@@ -7,9 +10,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ErrorResponseComponent implements OnInit {
 
-  constructor() { }
+  model: any;
+  constructor(@Inject(MAT_DIALOG_DATA) public data,
+    private ds: EventlogService
+  ) { }
 
   ngOnInit() {
+    this.ds.getById(this.data.id).subscribe(
+      result => {
+        this.model = result;
+      },
+      error => {
+        console.log(error);
+      }
+    );
   }
 
 }

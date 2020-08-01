@@ -1,0 +1,29 @@
+.card-subtitle{
+    display: flex;
+    align-items: baseline;    
+}
+
+.container-filters{      
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    flex: 1;
+    margin: 10px; 
+}
+
+.selectForm{  
+    margin-right: 15px;    
+}
+
+.inputForm{
+    flex: 1;
+    margin-right: 20px;
+}
+
+.inputSearch{        
+    display: flex;
+    flex: 1;
+    justify-content: baseline;
+    flex-direction: row;
+    
+}

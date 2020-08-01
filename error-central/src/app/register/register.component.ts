@@ -17,14 +17,16 @@ export class RegisterComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: User,
     private ds: AuthenticationService,
     private snackBar: MatSnackBar,) {
-    this.data = new User();
+    this.data = new User();    
+    // this.hidePassword = false;
   }
 
-  ngOnInit() {
+  ngOnInit() {    
   }
 
   register() {
     this.ds.register(this.data).subscribe(result => {
+      this.dialogRef.close();
     },
       error => {
         this.ToastError("Não foi possível encontrar efetuar o cadastro");

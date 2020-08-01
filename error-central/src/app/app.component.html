@@ -2,9 +2,10 @@
 <mat-toolbar class="main-toolbar" *ngIf="currentUser">
     <div class="first-section">
         <span>Error Central</span>
-        <div class="welcome-phrase">
-            <span id="token">Bem-vindo(a)! Seu token é {{currentUser.accessToken}} </span>
+        <div class="session-info">        
+            <span id="token"> Bem-vindo(a)! Seu token é {{currentUser.accessToken}}</span>
         </div>
+        <div style="clear:both"></div>
     </div>
     <div class="sign-section">
         <div>

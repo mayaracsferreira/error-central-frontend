@@ -15,6 +15,7 @@ import { MatDialog, MatDialogConfig } from '@angular/material';
 })
 export class AppComponent implements OnInit {
   currentUser: User;
+  private dialogRef;
 
   constructor(
     private router: Router,
@@ -37,13 +38,12 @@ export class AppComponent implements OnInit {
     dialogConfig.autoFocus = true;
     dialogConfig.width = '500px';
     dialogConfig.data = LoginModel;
-    const dialogRef = this.dialog.open(LoginComponent, dialogConfig);
-    dialogRef.afterClosed().subscribe(result => {
+    this.dialogRef = this.dialog.open(LoginComponent, dialogConfig);
+    this.dialogRef.afterClosed().subscribe(result => {
       console.log(result);
       this.router.navigate(['/']);
     });
 
-    
 
   }
 
@@ -52,10 +52,11 @@ export class AppComponent implements OnInit {
     dialogConfig.autoFocus = true;
     dialogConfig.width = '500px';
     dialogConfig.data = User;
-    const dialogRef = this.dialog.open(RegisterComponent, dialogConfig);
+    this.dialogRef = this.dialog.open(RegisterComponent, dialogConfig);
 
-    dialogRef.afterClosed().subscribe(result => {
+    this.dialogRef.afterClosed().subscribe(result => {
       console.log(result);
+      this.router.navigate(['/']);
     });
   }
 

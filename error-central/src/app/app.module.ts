@@ -1,3 +1,4 @@
+import { LoginModel } from './common/models/login-model';
 import { ErrorCentralModule } from './core/error-central.module';
 import { AuthenticationService } from './common/services/authentication.service';
 import { MatIconModule } from '@angular/material/icon';
@@ -25,15 +26,7 @@ const appRoutes: Routes = [
   {
     path: 'bem-vindo',
     component: HomeComponent,
-  },
-  {
-    path: 'login',
-    component: LoginComponent,
-  },
-  {
-    path: 'cadastro',
-    component: RegisterComponent,
-  },
+  }
 ];
 
 @NgModule({
@@ -68,6 +61,6 @@ const appRoutes: Routes = [
   ],
   providers: [AuthenticationService],
   bootstrap: [AppComponent],
-  entryComponents: [ToastrComponent]
+  entryComponents: [ToastrComponent, LoginComponent, RegisterComponent]
 })
 export class AppModule { }

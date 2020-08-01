@@ -1,3 +1,7 @@
+import { MatCardModule } from '@angular/material/card';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -6,7 +10,7 @@ import { CommonModule } from '@angular/common';
 import { ErrorResponseComponent } from './error-response/error-response.component';
 import { Routes, RouterModule } from '@angular/router';
 import { ErrorPageComponent } from './error-page/error-page.component';
-import { MatMenu, MatMenuModule, MatSelectModule, MatTableModule } from '@angular/material';
+import { MatMenu, MatMenuModule, MatSelectModule, MatTableModule, MatTooltipModule, MatList, MatListModule } from '@angular/material';
 
 const routes: Routes = [
   {
@@ -14,13 +18,16 @@ const routes: Routes = [
     component: ErrorPageComponent
   },
   {
-    path: 'error-response',
-    component: ErrorResponseComponent,
-  }
+    path: 'erro',
+    component: ErrorPageComponent
+  } 
 ];
 
 @NgModule({
-  declarations: [ErrorResponseComponent, ErrorPageComponent],
+  declarations: [
+    ErrorResponseComponent, 
+    ErrorPageComponent
+  ],
   imports: [
     CommonModule,
     RouterModule.forRoot(routes),
@@ -30,7 +37,14 @@ const routes: Routes = [
     MatMenuModule,
     MatSelectModule,
     MatButtonModule,
-    MatTableModule
+    MatTableModule,
+    MatTooltipModule,
+    BrowserAnimationsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatCardModule,
+    MatTableModule,
+    MatListModule
   ],
   exports: [
     MatToolbarModule,

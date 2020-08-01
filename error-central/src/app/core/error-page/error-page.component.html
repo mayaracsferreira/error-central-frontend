@@ -1,15 +1,97 @@
-<div class="container">
-    <div class="container-filters">
-        <mat-select></mat-select>
-        <mat-select></mat-select>
-        <mat-select></mat-select>
-        <input matInput placeholder="busca">
-    </div>
-    <div>
-        <button  mat-button>Arquivar</button>
-        <button  mat-button>Apagar</button>        
-    </div>
-    <div class="table">
-        <!-- <mat-table></mat-table> -->
-    </div>
-</div>
+<mat-card class="container">
+    <mat-card-subtitle class="card-subtitle">
+        <div class="container-filters">
+            <div>
+                <mat-form-field appearance="outline" class="selectForm">
+                    <mat-label>Ambiente</mat-label>
+                    <mat-select id="ambiente">
+                        <mat-option *ngFor="let item of environments" [value]="item">
+                            {{ item }}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <mat-form-field appearance="outline" class="selectForm">
+                    <mat-label>Ordenar por</mat-label>
+                    <mat-select id="ordem">
+                        <mat-option *ngFor="let item of environments" [value]="item">
+                            {{ item }}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <mat-form-field appearance="outline" class="selectForm">
+                    <mat-label>Buscar por</mat-label>
+                    <mat-select id="buscaPor">
+                        <mat-option *ngFor="let item of environments" [value]="item">
+                            {{ item }}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <mat-form-field appearance="standard" class="inputForm">
+                <div class="inputSearch">
+                    <input matInput id="searchText" name="busca" placeholder="Buscar" autofocus
+                        (keypress)="doSearch(txt.value)" (keyup.enter)="doSearch(txt.value)"
+                        (keyup)="doSearch(txt.value)" #txt>
+                    <button mat-button *ngIf="txt.value" matSuffix mat-icon-button aria-label="Clear"
+                        (click)="doSearch('') || txt.value=''" tabindex=2>
+                        <i class="material-icons">close</i>
+                    </button>
+                    <button id="search" mat-button >
+                        <mat-icon>search</mat-icon>
+                    </button>
+                </div>
+            </mat-form-field>
+        </div>
+    </mat-card-subtitle>
+    <mat-card-content>
+        <div>
+            <button mat-button>Arquivar</button>
+            <button mat-button>Apagar</button>
+            <!-- <button mat-button (click)="openLoginDialog(1)">teste</button> -->
+        </div>
+        <mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+            <!-- eventID Column -->
+            <ng-container matColumnDef="eventID">
+                <mat-header-cell *matHeaderCellDef> Event ID </mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.eventID}} </mat-cell>
+              </ng-container>
+
+            <!-- level Column -->
+            <ng-container matColumnDef="level">
+              <mat-header-cell *matHeaderCellDef> Level </mat-header-cell>
+              <mat-cell *matCellDef="let element"> {{element.level}} </mat-cell>
+            </ng-container>                      
+          
+            <!-- createdDate Column -->
+            <ng-container matColumnDef="createdDate">
+              <mat-header-cell *matHeaderCellDef> Data Criação </mat-header-cell>
+              <mat-cell *matCellDef="let element"> {{element.createdDate}} </mat-cell>
+            </ng-container>
+          
+            <!-- delete Column -->
+            <ng-container matColumnDef="delete">
+              <mat-header-cell *matHeaderCellDef> Remover </mat-header-cell>
+              <mat-cell *matCellDef="let element"> {{element.delete}} </mat-cell>
+            </ng-container>
+
+            <!-- archive Column -->
+            <ng-container matColumnDef="archive">
+              <mat-header-cell *matHeaderCellDef> Arquivar </mat-header-cell>
+              <mat-cell *matCellDef="let element"> {{element.archive}} </mat-cell>
+            </ng-container>
+
+            <!-- details Column -->
+            <ng-container matColumnDef="details">
+                <mat-header-cell *matHeaderCellDef> Detalhes </mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.details}} </mat-cell>
+              </ng-container>
+          
+            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+          </mat-table>
+
+    </mat-card-content>
+
+
+
+</mat-card>

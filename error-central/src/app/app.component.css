@@ -29,3 +29,24 @@
     flex-wrap: wrap;
     font-size: smaller;
 }
+
+.session-info{
+    width: calc(100% - 10px);
+    height: calc(100% - 10px);
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;    
+}
+
+#token{
+    margin: 15px;    
+}
+
+
+#token:hover{
+    cursor: pointer;
+/*    overflow: auto; 
+    white-space: normal;    
+    text-overflow: unset;
+    */
+}

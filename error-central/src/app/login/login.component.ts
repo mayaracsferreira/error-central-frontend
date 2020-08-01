@@ -12,19 +12,22 @@ import { Component, OnInit, Inject } from '@angular/core';
 })
 export class LoginComponent implements OnInit {
 
+  public hidePassword: boolean;
   constructor(public dialogRef: MatDialogRef<LoginComponent>,
     @Inject(MAT_DIALOG_DATA) public data: LoginModel,
     private ds: AuthenticationService,
-    private snackBar: MatSnackBar,) {    
-      this.data = new LoginModel();      
+    private snackBar: MatSnackBar,) {
+    this.data = new LoginModel();
+    this.hidePassword = false;
   }
 
   ngOnInit() {
   }
 
-  login() {    
+  login() {
     this.ds.login(this.data).subscribe(result => {
-      console.log(result);
+      console.log(result);      
+      this.dialogRef.close();
     },
       error => {
         this.ToastError("Não foi possível encontrar usuário com o e-mail informado");

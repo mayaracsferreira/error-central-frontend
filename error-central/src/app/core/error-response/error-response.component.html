@@ -1,1 +1,30 @@
-<mat-toolbar></mat-toolbar>
+<mat-card class="container">
+    <mat-card-title class="card-title">
+        <span>
+            Erro no {{model.origin}}
+        </span>
+        <span>em {{model.createdDate | date: 'dd/MM/yyyy HH:mm:ss' }}
+        </span>
+    </mat-card-title>
+    <mat-card-content class="card-content">
+        <mat-list role="list">
+            <mat-list-item role="listitem" class="title">Titulo: {{model.title}}</mat-list-item>
+            <mat-list-item role="listitem" class="description">Descrição : {{model.description}}</mat-list-item>
+            <mat-list-item role="listitem" class="log">Exceção : {{model.log}}</mat-list-item>
+            <mat-list-item role="listitem" class="level">Nível: {{model.level}}
+                <div class="level-icons">
+                    <mat-icon id="debug" *ngIf="model.level === 'DEBUG'"
+                        style="-webkit-text-fill-color:rgb(25, 25, 112)">
+                        bug_report</mat-icon>
+                    <mat-icon id="warn" *ngIf="model.level === 'WARN'" style="-webkit-text-fill-color:orange">
+                        warning
+                    </mat-icon>
+                    <mat-icon id="error" *ngIf="model.level === 'ERROR'" style="-webkit-text-fill-color:red">error
+                    </mat-icon>
+                </div>
+            </mat-list-item>
+            <mat-list-item role="listitem" class="environment">Ambiente: {{model.environment}}</mat-list-item>
+            <mat-list-item role="listitem" class="collectedBy">Coletado por: {{model.collectedBy}}</mat-list-item>
+        </mat-list>
+    </mat-card-content>
+</mat-card>
