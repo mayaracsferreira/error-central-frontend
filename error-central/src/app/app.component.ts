@@ -17,6 +17,8 @@ export class AppComponent implements OnInit {
   currentUser: User;
   private dialogRef;
 
+  teste;
+
   constructor(
     private router: Router,
     private dialog: MatDialog,
@@ -25,8 +27,7 @@ export class AppComponent implements OnInit {
     this.ds.currentUser.subscribe(x => this.currentUser = x);
   }
 
-  ngOnInit() {
-    console.log(this.currentUser);
+  ngOnInit() {    
   }
 
   openGithub() {

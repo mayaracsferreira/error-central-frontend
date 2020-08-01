@@ -1,3 +1,4 @@
+import { EventLogModel } from './../models/event-log-model';
 import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
@@ -12,8 +13,9 @@ export class EventlogService {
     headers: new HttpHeaders({
       Accept: 'application/json',
       'Content-Type': 'application/json',
+      'Authorization': 'bearer ' + JSON.parse(localStorage.getItem('currentUser')).accessToken
     }),
-  };
+  }; 
 
   protected _serviceUrl: string = null;
   protected readonly _http: HttpClient;
@@ -23,15 +25,22 @@ export class EventlogService {
     this._serviceUrl = `${environment.Api.url}/api/EventLog/`;
   }
 
+
+
   public getById<EventLogModel>(id: number): Observable<EventLogModel> {
-    return this._http.get<EventLogModel>(this._serviceUrl + id);
+    return this._http.get<EventLogModel>(this._serviceUrl + id, this.defaultRequestOpts);
   }
 
   public getAll<EventLogModel>(): Observable<EventLogModel> {
-    return this._http.get<EventLogModel>(this._serviceUrl);
+    return this._http.get<EventLogModel>(this._serviceUrl, this.defaultRequestOpts);
   }
 
-  public delete<T>(id: number): Observable<T> {
-    return this._http.delete<T>(this._serviceUrl + id, this.defaultRequestOpts);
+  public delete<T>(id: number): Observable<EventLogModel> {
+    return this._http.delete<EventLogModel>(this._serviceUrl + id, this.defaultRequestOpts);
   }
+
+  public update<T>(id: number, model: any): Observable<EventLogModel> {
+    return this._http.put<EventLogModel>(this._serviceUrl + id, JSON.stringify(model), this.defaultRequestOpts);
+  }
+
 }

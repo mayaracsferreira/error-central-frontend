@@ -10,17 +10,13 @@ import { CommonModule } from '@angular/common';
 import { ErrorResponseComponent } from './error-response/error-response.component';
 import { Routes, RouterModule } from '@angular/router';
 import { ErrorPageComponent } from './error-page/error-page.component';
-import { MatMenu, MatMenuModule, MatSelectModule, MatTableModule, MatTooltipModule, MatList, MatListModule } from '@angular/material';
+import { MatMenu, MatMenuModule, MatSelectModule, MatTableModule, MatTooltipModule, MatList, MatListModule, MatSnackBarModule } from '@angular/material';
 
 const routes: Routes = [
   {
     path: '',
     component: ErrorPageComponent
-  },
-  {
-    path: 'erro',
-    component: ErrorPageComponent
-  } 
+  }
 ];
 
 @NgModule({
@@ -44,7 +40,9 @@ const routes: Routes = [
     MatInputModule,
     MatCardModule,
     MatTableModule,
-    MatListModule
+    MatListModule,
+    MatSnackBarModule
+
   ],
   exports: [
     MatToolbarModule,

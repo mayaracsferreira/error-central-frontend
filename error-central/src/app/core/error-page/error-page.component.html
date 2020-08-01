@@ -61,6 +61,18 @@
                 <mat-cell *matCellDef="let element"> {{element.level}} </mat-cell>
             </ng-container>
 
+            <!-- level Column -->
+            <ng-container matColumnDef="log">
+                <mat-header-cell *matHeaderCellDef> Exceção </mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.log}} </mat-cell>
+            </ng-container>
+
+            <!-- level Column -->
+            <ng-container matColumnDef="environment">
+                <mat-header-cell *matHeaderCellDef> Ambiente </mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.environment}} </mat-cell>
+            </ng-container>
+
             <!-- createdDate Column -->
             <ng-container matColumnDef="createdDate">
                 <mat-header-cell *matHeaderCellDef> Data Criação </mat-header-cell>
@@ -91,7 +103,7 @@
             <ng-container matColumnDef="delete">
                 <mat-header-cell *matHeaderCellDef> Remover </mat-header-cell>
                 <mat-cell *matCellDef="let element">
-                    <button mat-button (click)="delete(element.eventID)">
+                    <button mat-button (click)="deleteEvent(element.eventID)">
                         <i class="material-icons">delete</i>
                     </button>
                 </mat-cell>

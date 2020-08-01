@@ -22,10 +22,14 @@ import { HttpClientModule } from '@angular/common/http';
 import { ToastrComponent } from './common/toastr/toastr.component';
 
 
-const appRoutes: Routes = [ 
+const appRoutes: Routes = [
   {
     path: 'bem-vindo',
     component: HomeComponent,
+  }, 
+  {
+    path: 'erro',
+    loadChildren: './core/error-central.module#ErrorCentralModule'
   }
 ];
 

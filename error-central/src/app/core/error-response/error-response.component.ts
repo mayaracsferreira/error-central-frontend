@@ -1,6 +1,4 @@
 import { MAT_DIALOG_DATA } from '@angular/material';
-import { EventLogModel } from './../../common/models/event-log-model';
-import { EventlogService } from './../../common/services/eventlog.service';
 import { Component, OnInit, Inject } from '@angular/core';
 
 @Component({
@@ -10,13 +8,11 @@ import { Component, OnInit, Inject } from '@angular/core';
 })
 export class ErrorResponseComponent implements OnInit {
 
-  model: any;
   constructor(@Inject(MAT_DIALOG_DATA) public data,
-    private ds: EventlogService
   ) { }
 
   ngOnInit() {
-    
+
   }
 
 }
