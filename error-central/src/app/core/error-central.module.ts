@@ -49,6 +49,7 @@ const routes: Routes = [
   exports: [
     MatToolbarModule,
     MatIconModule
-  ]
+  ],
+  entryComponents: [ErrorResponseComponent]
 })
 export class ErrorCentralModule { }

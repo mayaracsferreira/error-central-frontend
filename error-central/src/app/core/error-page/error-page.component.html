@@ -36,7 +36,7 @@
                         (click)="doSearch('') || txt.value=''" tabindex=2>
                         <i class="material-icons">close</i>
                     </button>
-                    <button id="search" mat-button >
+                    <button id="search" mat-button>
                         <mat-icon>search</mat-icon>
                     </button>
                 </div>
@@ -44,54 +44,62 @@
         </div>
     </mat-card-subtitle>
     <mat-card-content>
-        <div>
+        <!-- <div>
             <button mat-button>Arquivar</button>
-            <button mat-button>Apagar</button>
-            <!-- <button mat-button (click)="openLoginDialog(1)">teste</button> -->
-        </div>
+            <button mat-button>Apagar</button>            
+        </div> -->
         <mat-table [dataSource]="dataSource" class="mat-elevation-z8">
             <!-- eventID Column -->
             <ng-container matColumnDef="eventID">
                 <mat-header-cell *matHeaderCellDef> Event ID </mat-header-cell>
                 <mat-cell *matCellDef="let element"> {{element.eventID}} </mat-cell>
-              </ng-container>
+            </ng-container>
 
             <!-- level Column -->
             <ng-container matColumnDef="level">
-              <mat-header-cell *matHeaderCellDef> Level </mat-header-cell>
-              <mat-cell *matCellDef="let element"> {{element.level}} </mat-cell>
-            </ng-container>                      
-          
-            <!-- createdDate Column -->
-            <ng-container matColumnDef="createdDate">
-              <mat-header-cell *matHeaderCellDef> Data Criação </mat-header-cell>
-              <mat-cell *matCellDef="let element"> {{element.createdDate}} </mat-cell>
-            </ng-container>
-          
-            <!-- delete Column -->
-            <ng-container matColumnDef="delete">
-              <mat-header-cell *matHeaderCellDef> Remover </mat-header-cell>
-              <mat-cell *matCellDef="let element"> {{element.delete}} </mat-cell>
+                <mat-header-cell *matHeaderCellDef> Level </mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.level}} </mat-cell>
             </ng-container>
 
-            <!-- archive Column -->
-            <ng-container matColumnDef="archive">
-              <mat-header-cell *matHeaderCellDef> Arquivar </mat-header-cell>
-              <mat-cell *matCellDef="let element"> {{element.archive}} </mat-cell>
+            <!-- createdDate Column -->
+            <ng-container matColumnDef="createdDate">
+                <mat-header-cell *matHeaderCellDef> Data Criação </mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.createdDate}} </mat-cell>
             </ng-container>
 
             <!-- details Column -->
             <ng-container matColumnDef="details">
                 <mat-header-cell *matHeaderCellDef> Detalhes </mat-header-cell>
-                <mat-cell *matCellDef="let element"> {{element.details}} </mat-cell>
-              </ng-container>
-          
+                <mat-cell *matCellDef="let element">
+                    <button mat-button (click)="openLoginDialog(element.eventID)">
+                        <i class="material-icons">info</i>
+                    </button>
+                </mat-cell>
+            </ng-container>
+
+            <!-- archive Column -->
+            <ng-container matColumnDef="archive">
+                <mat-header-cell *matHeaderCellDef> Arquivar </mat-header-cell>
+                <mat-cell *matCellDef="let element">
+                    <button mat-button (click)="archive(element.eventID)">
+                        <i class="material-icons">archive</i>
+                    </button>
+                </mat-cell>
+            </ng-container>
+
+            <!-- delete Column -->
+            <ng-container matColumnDef="delete">
+                <mat-header-cell *matHeaderCellDef> Remover </mat-header-cell>
+                <mat-cell *matCellDef="let element">
+                    <button mat-button (click)="delete(element.eventID)">
+                        <i class="material-icons">delete</i>
+                    </button>
+                </mat-cell>
+            </ng-container>
+
             <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
             <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-          </mat-table>
+        </mat-table>
 
     </mat-card-content>
-
-
-
 </mat-card>

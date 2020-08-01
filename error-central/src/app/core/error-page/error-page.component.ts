@@ -17,8 +17,8 @@ enum EnvironmentEnum {
 })
 export class ErrorPageComponent implements OnInit {
 
-  public model: any;
-  displayedColumns: string[] = ['eventID', 'level', 'createdDate', 'delete', 'archive', 'details']
+  dataSource: any;
+  displayedColumns: string[] = ['eventID', 'level', 'createdDate', 'details', 'archive', 'delete']
 
   public environments = ['Produção', 'Homologação', 'Dev']
 
@@ -27,14 +27,24 @@ export class ErrorPageComponent implements OnInit {
     private dialog: MatDialog) { }
 
   ngOnInit() {
+    this.onSearch();
+  }
 
+  onSearch() {
+    this.ds.getAll().subscribe(result => {
+      this.dataSource = result;
+    });
+  }
+
+  delete(id: number){
+    this.ds.delete(id);
   }
 
   openLoginDialog(id: number) {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.autoFocus = true;
     dialogConfig.width = '500px';
-    dialogConfig.data = {id: id};
+    dialogConfig.data = { id: id };
     const dialogRef = this.dialog.open(ErrorResponseComponent, dialogConfig);
     dialogRef.afterClosed().subscribe(result => {
       console.log(result);
