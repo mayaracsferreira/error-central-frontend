@@ -1,0 +1,23 @@
+mat-card-content{
+    display: flex;    
+    flex-direction: column;
+    align-items: center;
+}
+
+.field{
+    margin: 15px;
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+}
+
+.pass{
+    display: flex;
+    flex: 1;
+    justify-content: flex-end;    
+}
+
+.mat-flat-button{
+    background-color: #7c1952;
+    color: white;
+}

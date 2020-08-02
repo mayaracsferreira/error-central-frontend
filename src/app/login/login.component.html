@@ -1,0 +1,20 @@
+<div class="main-container">
+  <mat-card class="container-register">
+    <mat-card-content>
+      <h1>Login</h1>
+      <mat-form-field class="field">
+        <input id="email" matInput placeholder="e-mail" [(ngModel)]="data.loginOrEmail" [type]="email">
+      </mat-form-field>
+      <mat-form-field class="field">
+        <div class="pass">
+          <input id="password" matInput placeholder="password" [(ngModel)]="data.password"
+            [type]="hidePassword ? 'password' : 'text'">
+          <button id="hideButton" mat-button (click)="hidePassword = !hidePassword">
+            <mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+          </button>
+        </div>
+      </mat-form-field>
+      <button mat-flat-button id="login" (click)="login()">Login</button>
+    </mat-card-content>
+  </mat-card>
+</div>

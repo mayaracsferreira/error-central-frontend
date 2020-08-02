@@ -1,0 +1,29 @@
+.main-content{
+    height: 50%; 
+    width: 50%;
+    display: flex;  
+    flex-direction: row;
+    align-items: center; 
+}
+
+.main-content a{
+    font-weight: bolder;    
+}
+
+span{
+    font-size: x-large;
+}
+
+.content{
+    background: rgb(230,163,163);
+    background: linear-gradient(105deg, rgba(230,163,163,1) 2%, rgba(255,135,102,1) 12%, rgba(255,122,102,0.9923319669664741) 46%, rgba(255,135,102,1) 86%, rgba(230,163,163,1) 96%);
+    
+    height: 100%;
+    padding: 0;
+    margin: 0;    
+    display: flex;
+    flex-direction: column;    
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+}

@@ -1,0 +1,52 @@
+.main-toolbar{
+    display: flex;
+    justify-content: space-between;   
+    background-color: #7c1952;
+    color: white;
+}
+
+.first-section{
+    display: flex;
+    justify-content: space-between;
+    width: 50%;
+    align-items: baseline;
+}
+
+.sign-section{
+    display: flex;
+    width: 20%;
+    justify-content: space-around;
+}
+
+.mat-button{
+    font-size: large;    
+}
+
+.welcome-phrase{
+    flex: 1;
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    font-size: smaller;
+}
+
+.session-info{
+    width: calc(100% - 10px);
+    height: calc(100% - 10px);
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;    
+}
+
+#token{
+    margin: 15px;    
+}
+
+
+#token:hover{
+    cursor: pointer;
+/*    overflow: auto; 
+    white-space: normal;    
+    text-overflow: unset;
+    */
+}

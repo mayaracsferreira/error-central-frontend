@@ -1,0 +1,133 @@
+<mat-card class="container">
+    <mat-card-subtitle class="card-subtitle">
+        <div class="container-filters">
+            <div class="selectors">
+                <mat-label>Agrupar</mat-label>
+                <div>
+                    <mat-form-field appearance="outline" class="selectForm">
+                        <mat-label>Ambiente</mat-label>
+                        <mat-select id="ambiente">
+                            <mat-option *ngFor="let item of environments" [value]="item">
+                                {{ item }}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <mat-form-field appearance="outline" class="selectForm">
+                        <mat-label>Ordenar por</mat-label>
+                        <mat-select id="ordem">
+                            <mat-option *ngFor="let item of orderFields" [value]="item">
+                                {{ item }}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="selectors">
+                <mat-label>Filtrar</mat-label>
+                <div class="search">
+                    <mat-form-field appearance="outline" class="selectForm">
+                        <mat-label>Buscar por</mat-label>
+                        <mat-select id="buscaPor">
+                            <mat-option *ngFor="let item of fields" [value]="item">
+                                {{ item }}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <mat-form-field appearance="standard" class="inputForm">
+                        <div class="inputSearch">
+                            <input matInput id="searchText" name="busca" placeholder="Buscar" autofocus
+                                (keypress)="doSearch(txt.value)" (keyup.enter)="doSearch(txt.value)"
+                                (keyup)="doSearch(txt.value)" #txt>
+                            <button mat-button *ngIf="txt.value" matSuffix mat-icon-button aria-label="Clear"
+                                (click)="doSearch('') || txt.value=''" tabindex=2>
+                                <i class="material-icons">close</i>
+                            </button>
+                            <button id="search" mat-button>
+                                <mat-icon>search</mat-icon>
+                            </button>
+                        </div>
+                    </mat-form-field>
+                </div>
+            </div>
+        </div>
+    </mat-card-subtitle>
+    <mat-card-content>
+        <!-- <div>
+            <button mat-button>Arquivar</button>
+            <button mat-button>Apagar</button>            
+        </div> -->
+        <mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+            <!-- eventID Column -->
+            <ng-container matColumnDef="eventID">
+                <mat-header-cell *matHeaderCellDef>Event ID </mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.eventID}} </mat-cell>
+            </ng-container>
+
+            <!-- level Column -->
+            <ng-container matColumnDef="level">
+                <mat-header-cell *matHeaderCellDef> Level </mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.level}} </mat-cell>
+            </ng-container>
+
+            <!-- log Column -->
+            <ng-container matColumnDef="log">
+                <mat-header-cell *matHeaderCellDef> Exceção </mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.log}} </mat-cell>
+            </ng-container>
+
+            <!-- environment Column -->
+            <ng-container matColumnDef="environment">
+                <mat-header-cell *matHeaderCellDef> Ambiente </mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.environment}} </mat-cell>
+            </ng-container>
+
+            <!-- origin Column -->
+            <ng-container matColumnDef="origin">
+                <mat-header-cell *matHeaderCellDef> Origem </mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.origin}} </mat-cell>
+            </ng-container>
+
+            <!-- details Column -->
+            <ng-container matColumnDef="details">
+                <mat-header-cell *matHeaderCellDef> Detalhes </mat-header-cell>
+                <mat-cell *matCellDef="let element">
+                    <button mat-button (click)="getEventDetails(element.eventID)">
+                        <i class="material-icons">info</i>
+                    </button>
+                </mat-cell>
+            </ng-container>
+
+            <!-- archive Column -->
+            <ng-container matColumnDef="archive">
+                <mat-header-cell *matHeaderCellDef> Arquivar </mat-header-cell>
+                <mat-cell *matCellDef="let element">
+                    <ng-container *ngIf="!element.archived">
+                        <button mat-button (click)="archiveEvent(element.eventID)">
+                            <i class="material-icons">archive</i>
+                        </button>
+                    </ng-container>
+                    <ng-container *ngIf="element.archived">
+                        <button mat-button disabled>
+                            <i class="material-icons">unarchive</i>
+                        </button>
+                    </ng-container>
+                </mat-cell>
+            </ng-container>
+
+            <!-- delete Column -->
+            <ng-container matColumnDef="delete">
+                <mat-header-cell *matHeaderCellDef> Remover </mat-header-cell>
+                <mat-cell *matCellDef="let element">
+                    <button mat-button (click)="deleteEvent(element.eventID)">
+                        <i class="material-icons">delete</i>
+                    </button>
+                </mat-cell>
+            </ng-container>
+
+            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+        </mat-table>
+        <!-- <mat-paginator [length]="dataSource.length" [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 100]" showFirstLastButtons></mat-paginator> -->
+
+    </mat-card-content>
+</mat-card>
