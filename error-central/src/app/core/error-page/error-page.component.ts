@@ -30,7 +30,6 @@ export class ErrorPageComponent implements OnInit {
 
   ngOnInit() {    
     this.onSearch();
-    console.log('bearer ' + JSON.parse(localStorage.getItem('currentUser')).accessToken);
   }
 
   ngAfterViewInit() {

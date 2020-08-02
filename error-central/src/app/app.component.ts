@@ -39,10 +39,8 @@ export class AppComponent implements OnInit {
     dialogConfig.data = LoginModel;
     this.dialogRef = this.dialog.open(LoginComponent, dialogConfig);
     this.dialogRef.afterClosed().subscribe(result => {
-      console.log(result);
       this.router.navigate(['/']);
     });
-
 
   }
 
@@ -54,7 +52,6 @@ export class AppComponent implements OnInit {
     this.dialogRef = this.dialog.open(RegisterComponent, dialogConfig);
 
     this.dialogRef.afterClosed().subscribe(result => {
-      console.log(result);
       this.router.navigate(['/']);
     });
   }
