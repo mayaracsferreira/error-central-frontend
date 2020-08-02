@@ -17,8 +17,6 @@ export class AppComponent implements OnInit {
   currentUser: User;
   private dialogRef;
 
-  teste;
-
   constructor(
     private router: Router,
     private dialog: MatDialog,

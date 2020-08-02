@@ -26,7 +26,6 @@ export class LoginComponent implements OnInit {
 
   login() {
     this.ds.login(this.data).subscribe(result => {
-      console.log(result);      
       this.dialogRef.close();
     },
       error => {

@@ -12,6 +12,7 @@
 }
 
 .selectForm{  
+    margin-top: 10px;    
     margin-right: 15px;    
 }
 
@@ -26,4 +27,17 @@
     justify-content: baseline;
     flex-direction: row;
     
+}
+
+.selectors{
+    flex: 1;
+    display: flex;
+    align-items: baseline;
+    flex-direction: column;    
+}
+
+.search{
+    flex: 1;
+    display: flex;
+    width: 100%;
 }

@@ -1,3 +1,4 @@
+import { AuthGuard } from './../common/auth-guard';
 import { MatCardModule } from '@angular/material/card';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -10,13 +11,14 @@ import { CommonModule } from '@angular/common';
 import { ErrorResponseComponent } from './error-response/error-response.component';
 import { Routes, RouterModule } from '@angular/router';
 import { ErrorPageComponent } from './error-page/error-page.component';
-import { MatMenu, MatMenuModule, MatSelectModule, MatTableModule, MatTooltipModule, MatList, MatListModule, MatSnackBarModule } from '@angular/material';
+import { MatMenu, MatMenuModule, MatSelectModule, MatTableModule, MatTooltipModule, MatList, MatListModule, MatSnackBarModule, MatPaginatorModule, MatSortModule } from '@angular/material';
 
 const routes: Routes = [
   {
     path: '',
-    component: ErrorPageComponent
-  }
+    component: ErrorPageComponent,
+    canActivate: [AuthGuard]
+  }  
 ];
 
 @NgModule({
@@ -41,7 +43,9 @@ const routes: Routes = [
     MatCardModule,
     MatTableModule,
     MatListModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatPaginatorModule,
+    MatSortModule
 
   ],
   exports: [

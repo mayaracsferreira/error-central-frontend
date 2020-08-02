@@ -9,4 +9,5 @@ export class EventLogModel {
     environment: string;
     archived: true;
     createdDate: Date;
+    frequency? : number;
 }

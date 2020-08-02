@@ -27,10 +27,7 @@ export class HomeComponent implements OnInit {
     dialogConfig.autoFocus = true;
     dialogConfig.width = '500px';
     dialogConfig.data = LoginModel;
-    const dialogRef = this.dialog.open(LoginComponent, dialogConfig);
-    dialogRef.afterClosed().subscribe(result => {
-      console.log(result);
-    });
+    const dialogRef = this.dialog.open(LoginComponent, dialogConfig);    
   }
 
   openRegisterDialog() {
@@ -39,10 +36,6 @@ export class HomeComponent implements OnInit {
     dialogConfig.width = '500px';
     dialogConfig.data = User;
     const dialogRef = this.dialog.open(RegisterComponent, dialogConfig);
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log(result);
-    });
   }
 
 }

@@ -17,20 +17,30 @@ export class RegisterComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: User,
     private ds: AuthenticationService,
     private snackBar: MatSnackBar,) {
-    this.data = new User();    
-    // this.hidePassword = false;
+    this.data = new User();
   }
 
-  ngOnInit() {    
+  ngOnInit() {
+
   }
 
   register() {
     this.ds.register(this.data).subscribe(result => {
       this.dialogRef.close();
+      this.ToastSuccess("Usuário cadastrado com sucesso!");
     },
       error => {
-        this.ToastError("Não foi possível encontrar efetuar o cadastro");
+        console.log(error);
+        this.ToastError("Não foi possível efetuar o cadastro.");
       });
+  }
+
+  public ToastSuccess(mensagem) {
+    this.snackBar.openFromComponent(ToastrComponent, {
+      data: mensagem,
+      panelClass: "sb-success",
+      verticalPosition: 'top'
+    });
   }
 
   ToastError(mensagem) {

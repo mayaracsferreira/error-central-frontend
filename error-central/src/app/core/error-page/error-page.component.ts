@@ -2,8 +2,8 @@ import { ToastrComponent } from './../../common/toastr/toastr.component';
 import { ErrorResponseComponent } from './../error-response/error-response.component';
 import { EventLogModel } from './../../common/models/event-log-model';
 import { EventlogService } from './../../common/services/eventlog.service';
-import { Component, OnInit } from '@angular/core';
-import { MatDialogConfig, MatDialog, MatSnackBar } from '@angular/material';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatDialogConfig, MatDialog, MatSnackBar, MatPaginator, MatSort } from '@angular/material';
 
 @Component({
   selector: 'app-error-page',
@@ -11,23 +11,43 @@ import { MatDialogConfig, MatDialog, MatSnackBar } from '@angular/material';
   styleUrls: ['./error-page.component.css']
 })
 export class ErrorPageComponent implements OnInit {
+  @ViewChild(MatPaginator, {static: false}) paginator: MatPaginator;
+  @ViewChild(MatSort, {static: false}) sort: MatSort;
 
   dataSource: any;
-  displayedColumns: string[] = ['eventID', 'level', 'log', 'environment', 'createdDate', 'details', 'archive', 'delete']
-
-  public environments = ['Produção', 'Homologação', 'Desenvolvimento']
+  public environments = ['Produção', 'Homologação', 'Desenvolvimento'];
+  public fields = ['Level', 'Descrição', 'Origem'];
+  public orderFields = ['Level', 'Frequency'];
+  OrderbyField: any;
+  SearchField: any;
+  SearchValue: any;
+  displayedColumns: string[] = ['eventID', 'level', 'log', 'environment', 'origin', 'details', 'archive', 'delete']  
 
   constructor(
     private ds: EventlogService,
     private dialog: MatDialog,
     private snackBar: MatSnackBar,) { }
 
-  ngOnInit() {
+  ngOnInit() {    
     this.onSearch();
+    console.log('bearer ' + JSON.parse(localStorage.getItem('currentUser')).accessToken);
   }
+
+  ngAfterViewInit() {
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
+}
 
   onSearch() {
     this.ds.getAll().subscribe(result => {
+      this.dataSource = result;
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
+    });
+  }
+
+  onSearchByField(searchFor : string = '', field: string = '') {
+    this.ds.getByField(searchFor, field).subscribe(result => {
       this.dataSource = result;
     });
   }
@@ -51,14 +71,24 @@ export class ErrorPageComponent implements OnInit {
     );
   }
 
-  // archiveEvent() {
-  //   this.ds.update();
-  // }
+  archiveEvent(id: number) {
+    this.ds.update(id).subscribe(
+      result => {
+        this.ToastSuccess(`Evento ${id} arquivado com sucesso!`);
+        //refresh data na tabela
+        this.ngOnInit();
+      },
+      error => {
+        this.ToastError(`Não foi possível arquivar o evento ${id}.`);
+      });
+  }
 
   deleteEvent(id: number) {
     this.ds.delete(id).subscribe(
       result => {
         this.ToastSuccess(`Evento ${id} excluído com sucesso!`);
+        //refresh data na tabela
+        this.ngOnInit();
       },
       error => {
         this.ToastError(`Não foi possível excluir o evento ${id}.`);

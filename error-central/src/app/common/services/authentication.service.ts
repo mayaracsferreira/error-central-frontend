@@ -30,8 +30,8 @@ export class AuthenticationService {
     return this.currentUserSubject.value;
   }
 
-  register(user: User) {
-    return this._http.post<User>(`${this._serviceUrl}/user`, user, httpOptions);
+  register(user) {
+    return this._http.post(`${this._serviceUrl}/user`, user, {responseType: 'text'}  );
   }
 
   login(loginInfo: LoginModel) {
