@@ -17,3 +17,23 @@ Acesse o projeto principal [aqui](https://github.com/mayaracsferreira/error-cent
 
 ### Mentoria 
 [Ingrid Oliveira](https://github.com/ingrid139)
+
+
+### Requisitos
+- [Angular CLI](https://github.com/angular/angular-cli)
+- NodeJS 10
+
+### Executar esse projeto
+
+#### Instalar as bibliotecas
+`npm i`
+
+#### Executando o projeto localmente
+`ng serve`
+
+Navegar pelo browser até `http://localhost:4200/`
+
+### Compilação do projeto 
+`ng build`
+
+O pacote será gerado na pasta `dist/`
