@@ -1,3 +1,5 @@
+import { LoaderComponent } from './loader/loader.component';
+import { FormsModule } from '@angular/forms';
 import { AuthGuard } from './../common/auth-guard';
 import { MatCardModule } from '@angular/material/card';
 import { MatInputModule } from '@angular/material/input';
@@ -11,20 +13,21 @@ import { CommonModule } from '@angular/common';
 import { ErrorResponseComponent } from './error-response/error-response.component';
 import { Routes, RouterModule } from '@angular/router';
 import { ErrorPageComponent } from './error-page/error-page.component';
-import { MatMenu, MatMenuModule, MatSelectModule, MatTableModule, MatTooltipModule, MatList, MatListModule, MatSnackBarModule, MatPaginatorModule, MatSortModule } from '@angular/material';
+import { MatMenuModule, MatSelectModule, MatTableModule, MatTooltipModule, MatListModule, MatSnackBarModule, MatPaginatorModule, MatSortModule, MatProgressSpinnerModule } from '@angular/material';
 
 const routes: Routes = [
   {
     path: '',
     component: ErrorPageComponent,
     canActivate: [AuthGuard]
-  }  
+  }
 ];
 
 @NgModule({
   declarations: [
-    ErrorResponseComponent, 
-    ErrorPageComponent
+    ErrorResponseComponent,
+    ErrorPageComponent,
+    LoaderComponent
   ],
   imports: [
     CommonModule,
@@ -45,13 +48,14 @@ const routes: Routes = [
     MatListModule,
     MatSnackBarModule,
     MatPaginatorModule,
-    MatSortModule
-
+    MatSortModule,
+    FormsModule,
+    MatProgressSpinnerModule    
   ],
   exports: [
     MatToolbarModule,
-    MatIconModule
+    MatIconModule    
   ],
-  entryComponents: [ErrorResponseComponent]
+  entryComponents: [ErrorResponseComponent, LoaderComponent]
 })
 export class ErrorCentralModule { }

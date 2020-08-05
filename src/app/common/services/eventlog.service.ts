@@ -29,12 +29,16 @@ export class EventlogService {
     return this._http.get<EventLogModel>(this._serviceUrl + id, this.defaultRequestOpts);
   }
 
-  public getEvents<EventLogModel>(environment: string = '', orderBy: string = '', searchFor : string = '', field: string = ''): Observable<EventLogModel> {
-    return this._http.get<EventLogModel>(this._serviceUrl + `filters/${environment}/${orderBy}/${searchFor}/${field}`, this.defaultRequestOpts);
+  public groupAndFilter<EventLogModel>(environment: string = '', orderBy: string = '', searchFor : string = '', field: string = ''): Observable<EventLogModel> {
+    return this._http.get<EventLogModel>(this._serviceUrl + `filters/${environment}/${orderBy}/${searchFor}/${field}`, this.defaultRequestOpts);    
+  }
+
+  public groupEvents<EventLogModel>(environment: string = '', orderBy: string = ''): Observable<EventLogModel> {
+    return this._http.get<EventLogModel>(this._serviceUrl + `groupBy/${environment}/${orderBy}`, this.defaultRequestOpts);    
   }
 
   public getByField<EventLogModel>(searchFor : string = '', field: string = ''): Observable<EventLogModel> {
-    return this._http.get<EventLogModel>(this._serviceUrl + `filters/${searchFor}/${field}`, this.defaultRequestOpts);
+    return this._http.get<EventLogModel>(this._serviceUrl + `search/${searchFor}/${field}`, this.defaultRequestOpts);
   }
 
   public getAll<EventLogModel>(): Observable<EventLogModel> {
@@ -45,8 +49,8 @@ export class EventlogService {
     return this._http.delete<EventLogModel>(this._serviceUrl + id, this.defaultRequestOpts);
   }
 
-  public update<T>(id: number): Observable<EventLogModel> {
-    return this._http.put<EventLogModel>(this._serviceUrl + id, '', this.defaultRequestOpts);
+  public archive<T>(id: number): Observable<EventLogModel> {
+    return this._http.put<EventLogModel>(`${this._serviceUrl}arquivar/` + id, '', this.defaultRequestOpts);
   }
 
 }
