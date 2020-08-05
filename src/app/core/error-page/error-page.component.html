@@ -6,15 +6,18 @@
                 <div>
                     <mat-form-field appearance="outline" class="selectForm">
                         <mat-label>Ambiente</mat-label>
-                        <mat-select id="ambiente">
+                        <mat-select id="ambiente" [(ngModel)]="selectedEnvironment" name="ambiente">
+                            <mat-option></mat-option>
                             <mat-option *ngFor="let item of environments" [value]="item">
                                 {{ item }}
                             </mat-option>
                         </mat-select>
                     </mat-form-field>
+
                     <mat-form-field appearance="outline" class="selectForm">
                         <mat-label>Ordenar por</mat-label>
-                        <mat-select id="ordem">
+                        <mat-select id="ordem" [(ngModel)]="selectedOrderby" name="ordem">
+                            <mat-option></mat-option>
                             <mat-option *ngFor="let item of orderFields" [value]="item">
                                 {{ item }}
                             </mat-option>
@@ -23,26 +26,36 @@
                 </div>
             </div>
             <div class="selectors">
-                <mat-label>Filtrar</mat-label>
+                <mat-label>Filtrar <button mat-button *ngIf="selectedSearch" matSuffix mat-icon-button
+                        aria-label="Clear" (click)="onSearch() || selectedSearch=''" tabindex=2>
+                        <i class="material-icons">close</i>
+                    </button></mat-label>
+
                 <div class="search">
                     <mat-form-field appearance="outline" class="selectForm">
                         <mat-label>Buscar por</mat-label>
-                        <mat-select id="buscaPor">
+                        <mat-select id="buscaPor" [(ngModel)]="selectedSearch" name="buscaPor">
+                            <mat-option></mat-option>
                             <mat-option *ngFor="let item of fields" [value]="item">
                                 {{ item }}
                             </mat-option>
                         </mat-select>
                     </mat-form-field>
                     <mat-form-field appearance="standard" class="inputForm">
-                        <div class="inputSearch">
-                            <input matInput id="searchText" name="busca" placeholder="Buscar" autofocus
-                                (keypress)="doSearch(txt.value)" (keyup.enter)="doSearch(txt.value)"
-                                (keyup)="doSearch(txt.value)" #txt>
-                            <button mat-button *ngIf="txt.value" matSuffix mat-icon-button aria-label="Clear"
+                        <div class="inputSearch" *ngIf="!selectedSearch">
+                            <input matInput id="searchTextDisabled" name="busca" disabled>
+                            <button id="searchDisabled" mat-button #tooltip="matTooltip"
+                                matTooltip="Escolha um campo para buscar">
+                                <mat-icon>search</mat-icon>
+                            </button>
+                        </div>
+                        <div class="inputSearch" *ngIf="selectedSearch">
+                            <input matInput id="searchText" name="busca" placeholder="Buscar" autofocus #txt>
+                            <!-- <button mat-button *ngIf="txt.value" matSuffix mat-icon-button aria-label="Clear"                            
                                 (click)="doSearch('') || txt.value=''" tabindex=2>
                                 <i class="material-icons">close</i>
-                            </button>
-                            <button id="search" mat-button>
+                            </button> -->
+                            <button id="search" mat-button (click)="searchFilter(txt.value)">
                                 <mat-icon>search</mat-icon>
                             </button>
                         </div>

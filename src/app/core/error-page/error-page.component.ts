@@ -11,41 +11,42 @@ import { MatDialogConfig, MatDialog, MatSnackBar, MatPaginator, MatSort } from '
   styleUrls: ['./error-page.component.css']
 })
 export class ErrorPageComponent implements OnInit {
-  @ViewChild(MatPaginator, {static: false}) paginator: MatPaginator;
-  @ViewChild(MatSort, {static: false}) sort: MatSort;
+  @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
+  @ViewChild(MatSort, { static: false }) sort: MatSort;
 
   dataSource: any;
   public environments = ['Produção', 'Homologação', 'Desenvolvimento'];
   public fields = ['Level', 'Descrição', 'Origem'];
   public orderFields = ['Level', 'Frequency'];
-  OrderbyField: any;
-  SearchField: any;
-  SearchValue: any;
-  displayedColumns: string[] = ['eventID', 'level', 'log', 'environment', 'origin', 'details', 'archive', 'delete']  
+  selectedEnvironment: string;
+  selectedOrderby: string;
+  selectedSearch: string;
+  selectedField: string = "";
+  displayedColumns: string[] = ['eventID', 'level', 'log', 'environment', 'origin', 'details', 'archive', 'delete']
 
   constructor(
     private ds: EventlogService,
     private dialog: MatDialog,
     private snackBar: MatSnackBar,) { }
 
-  ngOnInit() {    
+  ngOnInit() {
     this.onSearch();
   }
 
   ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
-}
+    // this.dataSource.paginator = this.paginator;
+    // this.dataSource.sort = this.sort;
+  }
 
   onSearch() {
     this.ds.getAll().subscribe(result => {
       this.dataSource = result;
-      this.dataSource.paginator = this.paginator;
-      this.dataSource.sort = this.sort;
+      // this.dataSource.paginator = this.paginator;
+      // this.dataSource.sort = this.sort;
     });
   }
 
-  onSearchByField(searchFor : string = '', field: string = '') {
+  onSearchByField(searchFor: string = '', field: string = '') {
     this.ds.getByField(searchFor, field).subscribe(result => {
       this.dataSource = result;
     });
@@ -68,6 +69,29 @@ export class ErrorPageComponent implements OnInit {
         console.log(error);
       }
     );
+  }
+
+  searchFilter(args) {
+    var searchFor: string;
+    switch (this.selectedSearch) {
+      case 'Level':
+        searchFor = 'level';
+        break;
+      case 'Descrição':
+        searchFor = 'description'
+        break;
+      case 'Origem':
+        searchFor = 'origin';
+        break;
+    }
+    this.ds.getByField(searchFor, args).subscribe(result => {
+      this.dataSource = result;
+      this.ToastSuccess(`Busca finalizada com sucesso`);
+    },
+      error => {
+        this.ToastError(`Não foram encontrados valores de ${this.selectedSearch} que satisafaçam a busca.`);
+      });
+
   }
 
   archiveEvent(id: number) {

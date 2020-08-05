@@ -1,3 +1,4 @@
+import { FormsModule } from '@angular/forms';
 import { AuthGuard } from './../common/auth-guard';
 import { MatCardModule } from '@angular/material/card';
 import { MatInputModule } from '@angular/material/input';
@@ -45,7 +46,8 @@ const routes: Routes = [
     MatListModule,
     MatSnackBarModule,
     MatPaginatorModule,
-    MatSortModule
+    MatSortModule,
+    FormsModule
 
   ],
   exports: [
