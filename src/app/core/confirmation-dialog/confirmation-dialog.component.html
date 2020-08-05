@@ -1,0 +1,12 @@
+<div class="dialog">
+    <div class="dialog-header">
+        <i class="material-icons" color="warn">warning</i>
+        <mat-dialog-content>{{data}}</mat-dialog-content>
+    </div>
+    <div class="dialog-content">
+        <mat-dialog-actions>            
+            <button mat-button (click)="confirm()">Confirmar</button>
+            <button mat-button (click)="cancel()">Cancelar</button>
+        </mat-dialog-actions>
+    </div>
+</div>

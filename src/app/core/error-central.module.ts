@@ -13,7 +13,8 @@ import { CommonModule } from '@angular/common';
 import { ErrorResponseComponent } from './error-response/error-response.component';
 import { Routes, RouterModule } from '@angular/router';
 import { ErrorPageComponent } from './error-page/error-page.component';
-import { MatMenuModule, MatSelectModule, MatTableModule, MatTooltipModule, MatListModule, MatSnackBarModule, MatPaginatorModule, MatSortModule, MatProgressSpinnerModule } from '@angular/material';
+import { MatMenuModule, MatSelectModule, MatTableModule, MatTooltipModule, MatListModule, MatSnackBarModule, MatPaginatorModule, MatSortModule, MatProgressSpinnerModule, MatDialogModule } from '@angular/material';
+import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-dialog.component';
 
 const routes: Routes = [
   {
@@ -27,7 +28,8 @@ const routes: Routes = [
   declarations: [
     ErrorResponseComponent,
     ErrorPageComponent,
-    LoaderComponent
+    LoaderComponent,
+    ConfirmationDialogComponent
   ],
   imports: [
     CommonModule,
@@ -50,12 +52,13 @@ const routes: Routes = [
     MatPaginatorModule,
     MatSortModule,
     FormsModule,
-    MatProgressSpinnerModule    
+    MatProgressSpinnerModule,
+    MatDialogModule
   ],
   exports: [
     MatToolbarModule,
     MatIconModule    
   ],
-  entryComponents: [ErrorResponseComponent, LoaderComponent]
+  entryComponents: [ErrorResponseComponent, LoaderComponent, ConfirmationDialogComponent]
 })
 export class ErrorCentralModule { }

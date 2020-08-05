@@ -1,3 +1,4 @@
+import { ConfirmationDialogComponent } from './../confirmation-dialog/confirmation-dialog.component';
 import { ToastrComponent } from './../../common/toastr/toastr.component';
 import { ErrorResponseComponent } from './../error-response/error-response.component';
 import { EventLogModel } from './../../common/models/event-log-model';
@@ -102,8 +103,10 @@ export class ErrorPageComponent implements OnInit {
         orderby = 'frequency'
         break;
     }
-
     if (this.selectedSearch && this.inputedValue) {
+      this.groupAndFilter();    
+    }
+    else {
       this.ds.groupEvents(environment, orderby).subscribe(result => {
         this.isLoading = false;
         this.displayedColumns = this.groupedColumns;
@@ -112,10 +115,7 @@ export class ErrorPageComponent implements OnInit {
         error => {
           this.isLoading = false;
           this.ToastError(`Erro ao agrupar os dados.`);
-        });
-    }
-    else {
-      this.groupAndFilter();
+        });     
     }
   }
 
@@ -198,32 +198,56 @@ export class ErrorPageComponent implements OnInit {
 
   archiveEvent(id: number) {
     this.isLoading = true;
-    this.ds.archive(id).subscribe(
-      result => {
+    this.openDialog("Deseja arquivar evento? Não será possível desfazer a ação!").afterClosed().subscribe(action => {
+      if (action === 'Confirm') {
+        this.ds.archive(id).subscribe(
+          result => {
+            this.isLoading = false;
+            this.ToastSuccess(`Evento ${id} arquivado com sucesso!`);
+            //refresh data na tabela
+            this.ngOnInit();
+          },
+          error => {
+            this.isLoading = false;
+            this.ToastError(`Não foi possível arquivar o evento ${id}.`);
+          });
+      }
+      else{
         this.isLoading = false;
-        this.ToastSuccess(`Evento ${id} arquivado com sucesso!`);
-        //refresh data na tabela
-        this.ngOnInit();
-      },
-      error => {
-        this.isLoading = false;
-        this.ToastError(`Não foi possível arquivar o evento ${id}.`);
-      });
+      }
+    });
   }
 
   deleteEvent(id: number) {
     this.isLoading = true;
-    this.ds.delete(id).subscribe(
-      result => {
+    this.openDialog("Deseja excluir evento?").afterClosed().subscribe(action => {
+      if (action === 'Confirm') {
+        this.ds.delete(id).subscribe(
+          result => {
+            this.isLoading = false;
+            this.ToastSuccess(`Evento ${id} excluído com sucesso!`);
+            //refresh data na tabela
+            this.ngOnInit();
+          },
+          error => {
+            this.isLoading = false;
+            this.ToastError(`Não foi possível excluir o evento ${id}.`);
+          });
+      }
+      else{
         this.isLoading = false;
-        this.ToastSuccess(`Evento ${id} excluído com sucesso!`);
-        //refresh data na tabela
-        this.ngOnInit();
-      },
-      error => {
-        this.isLoading = false;
-        this.ToastError(`Não foi possível excluir o evento ${id}.`);
-      });
+      }
+    });
+  }
+
+  openDialog(message){
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.width = '350px';
+    dialogConfig.data = message;
+    const dialogRef = this.dialog.open(ConfirmationDialogComponent, dialogConfig);
+    return dialogRef;
   }
 
   public ToastSuccess(mensagem) {
