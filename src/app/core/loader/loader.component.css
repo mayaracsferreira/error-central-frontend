@@ -1,0 +1,17 @@
+.loader{
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    overflow: auto;
+    background: rgba(0, 0, 0, 0.27);
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;       
+}
+.spinner circle {
+    stroke: #911D55;
+  }
+  

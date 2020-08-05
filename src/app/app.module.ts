@@ -16,10 +16,11 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { HomeComponent } from './home/home.component';
-import { MatDialogModule, MatSnackBarModule, MatMenuModule } from '@angular/material';
+import { MatDialogModule, MatSnackBarModule, MatMenuModule, MatProgressSpinnerModule } from '@angular/material';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { ToastrComponent } from './common/toastr/toastr.component';
+import { LoaderComponent } from './core/loader/loader.component';
 
 
 const appRoutes: Routes = [
@@ -39,7 +40,7 @@ const appRoutes: Routes = [
     RegisterComponent,
     LoginComponent,
     HomeComponent,
-    ToastrComponent,
+    ToastrComponent,    
   ],
   imports: [
     RouterModule.forRoot(
@@ -61,7 +62,8 @@ const appRoutes: Routes = [
     HttpClientModule,
     HttpClientModule,
     MatSnackBarModule,
-    MatMenuModule
+    MatMenuModule,
+    MatProgressSpinnerModule
   ],
   providers: [AuthenticationService],
   bootstrap: [AppComponent],
