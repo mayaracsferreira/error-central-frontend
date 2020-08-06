@@ -1,3 +1,5 @@
+import { ErrorInterceptor } from './common/error-interceptor';
+import { JwtInterceptor } from './common/jwt-interceptor';
 import { LoginModel } from './common/models/login-model';
 import { ErrorCentralModule } from './core/error-central.module';
 import { AuthenticationService } from './common/services/authentication.service';
@@ -18,7 +20,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { HomeComponent } from './home/home.component';
 import { MatDialogModule, MatSnackBarModule, MatMenuModule, MatProgressSpinnerModule } from '@angular/material';
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ToastrComponent } from './common/toastr/toastr.component';
 import { LoaderComponent } from './core/loader/loader.component';
 
@@ -64,8 +66,12 @@ const appRoutes: Routes = [
     MatSnackBarModule,
     MatMenuModule,
     MatProgressSpinnerModule
+  ],  
+  providers: [
+    AuthenticationService,
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
   ],
-  providers: [AuthenticationService],
   bootstrap: [AppComponent],
   entryComponents: [ToastrComponent, LoginComponent, RegisterComponent]
 })
