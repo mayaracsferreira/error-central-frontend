@@ -12,7 +12,7 @@ import { Component, OnInit, Inject } from '@angular/core';
 })
 export class RegisterComponent implements OnInit {
 
-  public hidePassword: boolean;
+  public hidePassword: boolean = true;
   constructor(public dialogRef: MatDialogRef<RegisterComponent>,
     @Inject(MAT_DIALOG_DATA) public data: User,
     private ds: AuthenticationService,
