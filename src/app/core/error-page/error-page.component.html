@@ -50,8 +50,11 @@
 
                     <mat-form-field appearance="outline" class="selectForm">
                         <mat-label>Ordenar por</mat-label>
-                        <mat-select id="ordem" [(ngModel)]="selectedOrderby" name="ordem"
-                            (selectionChange)="groupEvents()">
+                        <mat-select id="ordemdisabled" name="ordem"  *ngIf="!selectedEnvironment" matTooltip="Selecione um ambiente para agrupar" [disabled]="!selectedEnvironment">                           
+                            <mat-option></mat-option>
+                        </mat-select>
+
+                        <mat-select id="ordem"  *ngIf="selectedEnvironment" [(ngModel)]="selectedOrderby" name="ordem" (selectionChange)="groupEvents()">
                             <mat-option *ngFor="let item of orderFields" [value]="item">
                                 {{ item }}
                             </mat-option>

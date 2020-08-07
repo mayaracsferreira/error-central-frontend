@@ -12,13 +12,12 @@ import { Component, OnInit, Inject } from '@angular/core';
 })
 export class LoginComponent implements OnInit {
 
-  public hidePassword: boolean;
+  public hidePassword: boolean = true;
   constructor(public dialogRef: MatDialogRef<LoginComponent>,
     @Inject(MAT_DIALOG_DATA) public data: LoginModel,
     private ds: AuthenticationService,
     private snackBar: MatSnackBar,) {
-    this.data = new LoginModel();
-    this.hidePassword = false;
+    this.data = new LoginModel();    
   }
 
   ngOnInit() {
